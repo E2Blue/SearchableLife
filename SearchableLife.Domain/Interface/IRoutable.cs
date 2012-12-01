@@ -11,8 +11,14 @@ namespace SearchableLife.Domain.Interface
     /// </summary>
     public interface IRoutable
     {
+        /// <summary>
+        /// The title of the item
+        /// </summary>
         string Title { get; set; }
 
+        /// <summary>
+        /// The route used to access the item
+        /// </summary>
         string Slug { get; set; }
     }
 }
