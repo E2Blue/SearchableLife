@@ -6,7 +6,10 @@ using System.Threading.Tasks;
 
 namespace SearchableLife.Domain.Interface
 {
-    public interface IContent
+    public interface IMenuItem
     {
+        string MenuTitle { get; set; }
+
+        string MenuDescription { get; set; }
     }
 }

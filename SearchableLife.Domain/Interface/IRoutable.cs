@@ -6,7 +6,13 @@ using System.Threading.Tasks;
 
 namespace SearchableLife.Domain.Interface
 {
-    class IRoutable
+    /// <summary>
+    /// Used fo retrieving an items title and route
+    /// </summary>
+    public interface IRoutable
     {
+        string Title { get; set; }
+
+        string Slug { get; set; }
     }
 }

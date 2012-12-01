@@ -3,13 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using SearchableLife.Domain.Interface;
 
-namespace SearchableLife.Domain.Model
+namespace SearchableLife.Domain.Interface
 {
-
-    [Serializable]
-    public class Content: IRoutable
+    public interface ITaggable
     {
     }
 }

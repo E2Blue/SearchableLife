@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using SearchableLife.Domain.Interface;
 
 namespace SearchableLife.Domain.Model
 {
@@ -10,7 +11,7 @@ namespace SearchableLife.Domain.Model
     /// The basis of the system, used to tag content to enable searching.
     /// </summary>
     [Serializable]
-    public class Tag
+    public class Tag: IRoutable, IMenuItem
     {
     }
 }
