@@ -8,5 +8,6 @@ namespace SearchableLife.Data.Services
 {
     public class ServiceBase
     {
+
     }
 }

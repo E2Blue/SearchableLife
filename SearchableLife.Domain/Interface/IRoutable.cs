@@ -17,7 +17,7 @@ namespace SearchableLife.Domain.Interface
         string Title { get; set; }
 
         /// <summary>
-        /// The route used to access the item
+        /// The route used to access the item, must be unique per contenttype and can be used as an id
         /// </summary>
         string Slug { get; set; }
     }
