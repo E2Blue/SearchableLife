@@ -40,8 +40,18 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\ContentService.cs" />
+    <Compile Include="Services\MediaService.cs" />
+    <Compile Include="Services\RouteService.cs" />
     <Compile Include="Services\ServiceBase.cs" />
+    <Compile Include="Services\TagAggregatorService.cs" />
     <Compile Include="Services\TagService.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\SearchableLife.Domain\SearchableLife.Domain.csproj">
+      <Project>{75076117-9f5c-4760-a3d0-ef40684a94c4}</Project>
+      <Name>SearchableLife.Domain</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
