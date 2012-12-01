@@ -1,0 +1,5 @@
+C:\projects\SearchableLife\SearchableLife.Data\bin\Debug\SearchableLife.Data.dll
+C:\projects\SearchableLife\SearchableLife.Data\bin\Debug\SearchableLife.Data.pdb
+C:\projects\SearchableLife\SearchableLife.Data\obj\Debug\SearchableLife.Data.csprojResolveAssemblyReference.cache
+C:\projects\SearchableLife\SearchableLife.Data\obj\Debug\SearchableLife.Data.dll
+C:\projects\SearchableLife\SearchableLife.Data\obj\Debug\SearchableLife.Data.pdb
