@@ -11,8 +11,14 @@ namespace SearchableLife.Domain.Model
     /// Used to combine contents with specific tags for display, ie Malta2011 + Travel
     /// </summary>
     [Serializable]
-    public class TagAggregator: IRoutable, IMenuItem
+    public class TagAggregator: Content, IMenuItem
     {
-        public List<Tag> Tags { get; set; }
+        #region IMenuItem
+        public string MenuTitle { get; set; }
+
+        public string MenuDescription { get; set; }
+        #endregion
+
+        public List<Tag> AggragatedTags { get; set; }
     }
 }

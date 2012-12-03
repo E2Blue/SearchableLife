@@ -11,7 +11,12 @@ namespace SearchableLife.Domain.Model
     /// The basis of the system, used to tag content to enable searching.
     /// </summary>
     [Serializable]
-    public class Tag: IRoutable, IMenuItem
+    public class Tag : Content, IMenuItem
     {
+        #region IMenuItem
+        public string MenuTitle { get; set; }
+
+        public string MenuDescription { get; set; }
+        #endregion
     }
 }

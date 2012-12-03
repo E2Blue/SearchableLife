@@ -26,7 +26,7 @@ namespace SearchableLife.Data.Services
         /// </summary>
         /// <param name="slug">The slug used to find the item</param>
         /// <returns></returns>
-        public Content Get(string slug)
+        public Entry Get(string slug)
         {
             throw new NotImplementedException();
         }
@@ -36,7 +36,7 @@ namespace SearchableLife.Data.Services
         /// </summary>
         /// <param name="tagName">The tag to search for</param>
         /// <returns></returns>
-        public IEnumerable<Content> Search(string tagName)
+        public IEnumerable<Entry> Search(string tagName)
         {
             throw new NotImplementedException();
         }
@@ -46,7 +46,7 @@ namespace SearchableLife.Data.Services
         /// Uses the items slug to check wether to update or create
         /// </summary>
         /// <param name="item">the item to create or update</param>
-        public void Update(Content item)
+        public void Update(Entry item)
         {
             throw new NotImplementedException();
         }

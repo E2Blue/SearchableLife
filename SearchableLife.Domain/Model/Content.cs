@@ -7,9 +7,17 @@ using SearchableLife.Domain.Interface;
 
 namespace SearchableLife.Domain.Model
 {
-
-    [Serializable]
-    public class Content: IRoutable
+    public abstract class Content : IRoutable
     {
+        #region IRoutable
+        public string Title { get; set; }
+
+        public string Slug { get; set; }
+        #endregion
+
+        /// <summary>
+        /// The Html content of the item
+        /// </summary>
+        public string Content { get; set; }
     }
 }

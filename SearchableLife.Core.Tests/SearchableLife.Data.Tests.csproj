@@ -103,7 +103,7 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\SearchableLife\SearchableLife.Web.csproj">
+    <ProjectReference Include="..\SearchableLife.Web\SearchableLife.Web.csproj">
       <Project>{946A8A78-9166-43D1-A9F7-07A5B5F26B37}</Project>
       <Name>SearchableLife.Web</Name>
     </ProjectReference>
