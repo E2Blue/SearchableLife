@@ -3,3 +3,14 @@ C:\projects\SearchableLife\SearchableLife.Data\bin\Debug\SearchableLife.Data.pdb
 C:\projects\SearchableLife\SearchableLife.Data\obj\Debug\SearchableLife.Data.csprojResolveAssemblyReference.cache
 C:\projects\SearchableLife\SearchableLife.Data\obj\Debug\SearchableLife.Data.dll
 C:\projects\SearchableLife\SearchableLife.Data\obj\Debug\SearchableLife.Data.pdb
+C:\projects\SearchableLife\SearchableLife.Data\bin\Debug\Newtonsoft.Json.dll
+C:\projects\SearchableLife\SearchableLife.Data\bin\Debug\NLog.dll
+C:\projects\SearchableLife\SearchableLife.Data\bin\Debug\Raven.Abstractions.dll
+C:\projects\SearchableLife\SearchableLife.Data\bin\Debug\Raven.Client.Lightweight.dll
+C:\projects\SearchableLife\SearchableLife.Data\bin\Debug\SearchableLife.Domain.dll
+C:\projects\SearchableLife\SearchableLife.Data\bin\Debug\SearchableLife.Domain.pdb
+C:\projects\SearchableLife\SearchableLife.Data\bin\Debug\Newtonsoft.Json.pdb
+C:\projects\SearchableLife\SearchableLife.Data\bin\Debug\Newtonsoft.Json.xml
+C:\projects\SearchableLife\SearchableLife.Data\bin\Debug\NLog.xml
+C:\projects\SearchableLife\SearchableLife.Data\bin\Debug\Raven.Abstractions.pdb
+C:\projects\SearchableLife\SearchableLife.Data\bin\Debug\Raven.Client.Lightweight.pdb

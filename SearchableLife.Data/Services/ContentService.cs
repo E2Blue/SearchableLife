@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using SearchableLife.Domain.Interface;
 using SearchableLife.Domain.Model;
 
 namespace SearchableLife.Data.Services
@@ -18,17 +19,26 @@ namespace SearchableLife.Data.Services
         /// <param name="slug">Used to find the item to delete</param>
         public void Delete(string slug)
         {
-            throw new NotImplementedException();
+            using (var session = DocumentStore.OpenSession())
+            {
+                //FIXME:should use a slug index
+                var item = session.Query<Content>().First(c => c.Slug.ToLower() == slug.ToLower());
+                session.Delete<Content>(item);
+            }
         }
 
         /// <summary>
-        /// Retrieves a content item
+        /// Retrieves a content item, either Tag, Entry or TagAggregator
         /// </summary>
         /// <param name="slug">The slug used to find the item</param>
         /// <returns></returns>
-        public Entry Get(string slug)
+        public Content Get(string slug)
         {
-            throw new NotImplementedException();
+            using (var session = DocumentStore.OpenSession())
+            {
+                //FIXME: should use a slug index
+                return session.Query<Content>().First(e => e.Slug.ToLower() == slug.ToLower());
+            }
         }
 
         /// <summary>
@@ -36,9 +46,14 @@ namespace SearchableLife.Data.Services
         /// </summary>
         /// <param name="tagName">The tag to search for</param>
         /// <returns></returns>
-        public IEnumerable<Entry> Search(string tagName)
+        public IEnumerable<ITaggable> Search(string tagName)
         {
-            throw new NotImplementedException();
+            using (var session = DocumentStore.OpenSession())
+            {
+                //FIXME:should use a taggable index
+                var result = session.Query<ITaggable>().Where(t => t.TagNames.Contains(tagName));
+                return result;
+            }
         }
 
         /// <summary>
@@ -46,7 +61,7 @@ namespace SearchableLife.Data.Services
         /// Uses the items slug to check wether to update or create
         /// </summary>
         /// <param name="item">the item to create or update</param>
-        public void Update(Entry item)
+        public void Update(Content item)
         {
             throw new NotImplementedException();
         }

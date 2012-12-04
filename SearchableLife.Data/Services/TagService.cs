@@ -37,7 +37,7 @@ namespace SearchableLife.Data.Services
         /// </summary>
         /// <param name="tagNames">The tagnames to search by</param>
         /// <returns>Found tags</returns>
-        public IEnumerable<Tag> Get(params string tagNames)
+        public IEnumerable<Tag> Get(string[] tagNames)
         {
             throw new NotImplementedException();
         }

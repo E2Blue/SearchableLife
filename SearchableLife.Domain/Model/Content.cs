@@ -18,6 +18,6 @@ namespace SearchableLife.Domain.Model
         /// <summary>
         /// The Html content of the item
         /// </summary>
-        public string Content { get; set; }
+        public string HtmlContent { get; set; }
     }
 }

@@ -8,6 +8,6 @@ namespace SearchableLife.Domain.Interface
 {
     public interface ITaggable
     {
-        public List<string> TagNames { get; set; }
+        List<string> TagNames { get; set; }
     }
 }
