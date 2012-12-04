@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using SearchableLife.Data.Indexes;
+using SearchableLife.Data.Queries;
+using SearchableLife.Domain.Collections;
 using SearchableLife.Domain.Interface;
 using SearchableLife.Domain.Model;
 
@@ -47,12 +49,12 @@ namespace SearchableLife.Data.Services
         /// </summary>
         /// <param name="tagName">The tag to search for</param>
         /// <returns></returns>
-        public IEnumerable<ITaggable> Search(string tagName)
+        public PagedList<ITaggable> Search(ContentQuery query)
         {
             using (var session = DocumentStore.OpenSession())
             {
-                var result = session.Query<ITaggable,All_Taggable>().Where(t => t.TagNames.Any(tn => tn == tagName)).ToList();
-                return result;
+                var result = session.Query<ITaggable,All_Taggable>().Where(t => t.TagNames.Any(tn => tn == query.TagName)).Take(query.PageSize).Skip(query.PageSize * query.PageIndex);
+                return new PagedList<ITaggable>(result.ToList()) { PageIndex = query.PageIndex, PageSize = query.PageSize };
             }
         }
 

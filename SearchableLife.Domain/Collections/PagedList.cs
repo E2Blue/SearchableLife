@@ -10,7 +10,7 @@ namespace SearchableLife.Domain.Collections
     /// used for creating paged lists
     /// </summary>
     /// <typeparam name="t">The type the list should contain</typeparam>
-    public class PagedList<t> : IList<t>
+    public class PagedList<t> : List<t>
     {
         /// <summary>
         /// The requested pagesize
@@ -20,5 +20,15 @@ namespace SearchableLife.Domain.Collections
         /// The total count of items in data storage matching a criteria
         /// </summary>
         public int TotalCount { get; set; }
+
+        /// <summary>
+        /// the index of the current page
+        /// </summary>
+        public int PageIndex { get; set; }
+
+        public PagedList(IEnumerable<t> items)
+        {
+            AddRange(items);
+        }
     }
 }

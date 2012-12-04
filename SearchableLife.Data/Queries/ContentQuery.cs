@@ -6,7 +6,11 @@ using System.Threading.Tasks;
 
 namespace SearchableLife.Data.Queries
 {
-    class ContentQuery
+    public class ContentQuery : QueryBase
     {
+        /// <summary>
+        /// Currently only supports searching by a single tag
+        /// </summary>
+        public String TagName { get; set; }
     }
 }

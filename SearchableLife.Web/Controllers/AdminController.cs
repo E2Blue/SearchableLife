@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using SearchableLife.Data.Queries;
 using SearchableLife.Domain.Helpers;
 using SearchableLife.Domain.Model;
 
@@ -34,7 +35,7 @@ namespace SearchableLife.Web.Controllers
                 return RedirectToAction("Index");
             }
 
-            var result = ContentService.Search(slug);
+            var result = ContentService.Search(new ContentQuery() { TagName = slug, PageSize = 10,PageIndex = 0 });
 
             return View();
         }

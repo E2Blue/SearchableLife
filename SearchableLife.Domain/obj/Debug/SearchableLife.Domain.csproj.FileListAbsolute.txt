@@ -2,3 +2,4 @@ C:\projects\SearchableLife\SearchableLife.Domain\bin\Debug\SearchableLife.Domain
 C:\projects\SearchableLife\SearchableLife.Domain\bin\Debug\SearchableLife.Domain.pdb
 C:\projects\SearchableLife\SearchableLife.Domain\obj\Debug\SearchableLife.Domain.dll
 C:\projects\SearchableLife\SearchableLife.Domain\obj\Debug\SearchableLife.Domain.pdb
+C:\projects\SearchableLife\SearchableLife.Domain\obj\Debug\SearchableLife.Domain.csprojResolveAssemblyReference.cache
