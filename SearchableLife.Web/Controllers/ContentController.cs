@@ -6,15 +6,16 @@ using System.Web.Mvc;
 
 namespace SearchableLife.Web.Controllers
 {
-    public class ContentController : Controller
+    public class ContentController : BaseController
     {
-        //
-        // GET: /Content/
-
         public ActionResult Content(string slug)
         {
+            if (string.IsNullOrEmpty(slug))
+            {
+                return View("ContentList",ContentService.Search(new Data.Queries.TaggableQuery{PageIndex = 0,PageSize = 10}));
+            }
+
             return View();
         }
-
     }
 }

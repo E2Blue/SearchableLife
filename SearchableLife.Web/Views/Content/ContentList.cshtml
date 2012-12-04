@@ -1,0 +1,12 @@
+﻿@model SearchableLife.Domain.Collections.PagedList<SearchableLife.Domain.Model.Content>
+
+@{
+    ViewBag.Title = "ContentList";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>ContentList</h2>
+@foreach (var content in Model)
+{
+    <h2>@content.Title</h2>
+}

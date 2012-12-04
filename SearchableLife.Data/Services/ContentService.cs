@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Raven.Client.Linq;
 using SearchableLife.Data.Indexes;
 using SearchableLife.Data.Queries;
 using SearchableLife.Domain.Collections;
@@ -56,12 +57,19 @@ namespace SearchableLife.Data.Services
         /// </summary>
         /// <param name="tagName">The tag to search for</param>
         /// <returns></returns>
-        public PagedList<ITaggable> Search(TaggableQuery query)
+        public PagedList<Content> Search(TaggableQuery query)
         {
             using (var session = DocumentStore.OpenSession())
             {
-                var result = session.Query<ITaggable, All_Taggable>().Where(t => t.TagNames.Any(tn => tn == query.TagName)).Take(query.PageSize).Skip(query.PageSize * query.PageIndex);
-                return new PagedList<ITaggable>(result.ToList()) { PageIndex = query.PageIndex, PageSize = query.PageSize };
+                var result = session.Query<Content, All_Taggable>();
+                //filter on tag if a tag query is specified
+                if (!string.IsNullOrEmpty(query.TagName))
+                {
+                    result = (IRavenQueryable<Content>)result.Where(t => t.TagNames.Any(tn => tn == query.TagName));
+                }
+                result = (IRavenQueryable<Content>)result.Take(query.PageSize).Skip(query.PageSize * query.PageIndex);
+                
+                return new PagedList<Content>(result.ToList()) { PageIndex = query.PageIndex, PageSize = query.PageSize };
             }
         }
 
