@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SearchableLife.Data.Queries
 {
-    public class ContentQuery : QueryBase
+    public class TaggableQuery : GenericQuery
     {
         /// <summary>
         /// Currently only supports searching by a single tag

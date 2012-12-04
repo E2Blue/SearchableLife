@@ -16,17 +16,24 @@ namespace SearchableLife.Data.Services
     /// </summary>
     public class ContentService : ServiceBase
     {
+
+        TagService _tagService;
+
         /// <summary>
         /// Deletes a content item
         /// </summary>
         /// <param name="slug">Used to find the item to delete</param>
-        public void Delete(string slug)
+        public bool Delete(string slug)
         {
             using (var session = DocumentStore.OpenSession())
             {
-                //FIXME:should use a slug index
-                var item = session.Query<Content>().First(c => c.Slug.ToLower() == slug.ToLower());
-                session.Delete<Content>(item);
+                var item = session.Query<Content, All_Content>().FirstOrDefault(c => c.Slug.ToLower() == slug.ToLower());
+                if (item != null)
+                {
+                    session.Delete<Content>(item);
+                    return true;
+                }
+                return false;
             }
         }
 
@@ -35,12 +42,12 @@ namespace SearchableLife.Data.Services
         /// </summary>
         /// <param name="slug">The slug used to find the item</param>
         /// <returns></returns>
-        public Content Get(string slug)
+        public IRoutable Get(string slug)
         {
             slug = slug.ToLower();
             using (var session = DocumentStore.OpenSession())
             {
-                return session.Query<Content,All_Content>().FirstOrDefault(e => e.Slug == slug);
+                return session.Query<IRoutable, All_Content>().FirstOrDefault(e => e.Slug == slug);
             }
         }
 
@@ -49,12 +56,27 @@ namespace SearchableLife.Data.Services
         /// </summary>
         /// <param name="tagName">The tag to search for</param>
         /// <returns></returns>
-        public PagedList<ITaggable> Search(ContentQuery query)
+        public PagedList<ITaggable> Search(TaggableQuery query)
         {
             using (var session = DocumentStore.OpenSession())
             {
-                var result = session.Query<ITaggable,All_Taggable>().Where(t => t.TagNames.Any(tn => tn == query.TagName)).Take(query.PageSize).Skip(query.PageSize * query.PageIndex);
+                var result = session.Query<ITaggable, All_Taggable>().Where(t => t.TagNames.Any(tn => tn == query.TagName)).Take(query.PageSize).Skip(query.PageSize * query.PageIndex);
                 return new PagedList<ITaggable>(result.ToList()) { PageIndex = query.PageIndex, PageSize = query.PageSize };
+            }
+        }
+
+        /// <summary>
+        /// Strongly typed taggable content search, returns media or entries
+        /// </summary>
+        /// <typeparam name="taggable">Media or entry</typeparam>
+        /// <param name="query"></param>
+        /// <returns></returns>
+        public PagedList<taggable> Search<taggable>(TaggableQuery query) where taggable : ITaggable
+        {
+            using (var session = DocumentStore.OpenSession())
+            {
+                var result = session.Query<taggable>().Where(t => t.TagNames.Any(tn => tn == query.TagName)).Take(query.PageSize).Skip(query.PageSize * query.PageIndex);
+                return new PagedList<taggable>(result.ToList()) { PageIndex = query.PageIndex, PageSize = query.PageSize };
             }
         }
 
@@ -65,12 +87,21 @@ namespace SearchableLife.Data.Services
         /// <param name="item">the item to create or update</param>
         public void Update(Content item)
         {
+            //make sure that slugs are always compared in lowercase
             item.Slug = item.Slug.ToLower();
+
             using (var session = DocumentStore.OpenSession())
             {
+                _tagService.CreateNonExisting(item.TagNames,session);
+
                 session.Store(item, item.Slug);
                 session.SaveChanges();
             }
+        }
+
+        public ContentService()
+        {
+            _tagService = new TagService();
         }
     }
 }

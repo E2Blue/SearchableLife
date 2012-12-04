@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using SearchableLife.Data.Indexes;
 using SearchableLife.Domain.Model;
 
 namespace SearchableLife.Data.Services
@@ -20,10 +21,9 @@ namespace SearchableLife.Data.Services
         public bool Exists(string slug)
         {
             slug = slug.ToLower();
-            //ugly implementation?
             using (var session = DocumentStore.OpenSession())
             {
-                return session.Query<Content>().Any(c => c.Slug == slug);
+                return session.Query<Content,All_Content>().Any(c => c.Slug == slug);
             }
         }
     }

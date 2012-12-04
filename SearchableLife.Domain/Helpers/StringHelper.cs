@@ -14,7 +14,10 @@ namespace SearchableLife.Domain.Helpers
             if (!string.IsNullOrEmpty(csValues))
             {
                 values.AddRange(csValues.Split(','));
-                csValues.Trim();
+                for (int i = 0; i < values.Count; i++)
+                {
+                    values[i] = values[i].Trim(' ');
+                }
             }
             return values;
         }

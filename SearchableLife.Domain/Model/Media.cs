@@ -11,8 +11,7 @@ namespace SearchableLife.Domain.Model
     /// Used to save media such as video and images
     /// </summary>
     [Serializable]
-    public class Media : Content, ITaggable
+    public class Media : Content
     {
-        public List<string> TagNames { get; set; }
     }
 }

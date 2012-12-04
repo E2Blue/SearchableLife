@@ -11,8 +11,8 @@ namespace SearchableLife.Domain.Model
     /// A entry, can be thought of as a blogpost or facebook status or whatever
     /// </summary>
     [Serializable]
-    public class Entry: Content, ITaggable
+    public class Entry: Content
     {
-        public List<string> TagNames { get; set; }
+        
     }
 }

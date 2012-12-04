@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SearchableLife.Data.Queries
 {
-    public class QueryBase
+    public class GenericQuery
     {
         public string Query { get; set; }
         public int PageSize { get; set; }

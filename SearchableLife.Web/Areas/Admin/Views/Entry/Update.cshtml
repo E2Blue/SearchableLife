@@ -1,0 +1,23 @@
+﻿@model SearchableLife.Domain.Model.Entry
+
+@{
+    ViewBag.Title = "Entry";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Entry</h2>
+
+@using (Html.BeginForm(ViewBag.Create == true ? "Update" : "Create", "Entry",FormMethod.Post))
+{
+
+    @Html.LabelFor(e => e.Title)
+    @Html.TextBoxFor(e => e.Title)
+    @Html.LabelFor(e => e.Slug)
+    @Html.TextBoxFor(e => e.Slug)
+    @Html.LabelFor(e => e.TagNames)
+    @Html.TextBox("csTags",Model.TagNames != null ? string.Join(", ",Model.TagNames) : "")
+    @Html.LabelFor(e => e.HtmlContent)
+    @Html.TextAreaFor(e => e.HtmlContent)
+
+    <input type="submit" value="Submit" />
+}
