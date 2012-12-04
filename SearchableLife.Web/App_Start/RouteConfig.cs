@@ -15,14 +15,14 @@ namespace SearchableLife.Web
 
             routes.MapRoute(
                 "admin",
-                "admin/{action}/{id}",
-                new { controller = "Admin", action = "Index", id = UrlParameter.Optional }
+                "admin/{action}/{slug}",
+                new { controller = "Admin", action = "Index", slug = UrlParameter.Optional }
                 );
 
             routes.MapRoute(
                 name: "Default",
-                url: "{id}",
-                defaults: new { controller = "Content", action = "Content", id = UrlParameter.Optional }
+                url: "{slug}",
+                defaults: new { controller = "Content", action = "Content", slug = UrlParameter.Optional }
             );
         }
     }

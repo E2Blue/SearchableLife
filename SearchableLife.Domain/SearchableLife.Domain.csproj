@@ -39,6 +39,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Helpers\StringHelper.cs" />
     <Compile Include="Interface\IMenuItem.cs" />
     <Compile Include="Interface\IRoutable.cs" />
     <Compile Include="Interface\ITaggable.cs" />

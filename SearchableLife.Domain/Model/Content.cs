@@ -19,5 +19,7 @@ namespace SearchableLife.Domain.Model
         /// The Html content of the item
         /// </summary>
         public string HtmlContent { get; set; }
+
+        public DateTime Created { get; set; }
     }
 }

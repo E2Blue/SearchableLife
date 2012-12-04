@@ -5,6 +5,8 @@ using System.Text;
 using System.Threading.Tasks;
 using Raven.Client;
 using Raven.Client.Document;
+using Raven.Client.Indexes;
+using SearchableLife.Data.Indexes;
 
 namespace SearchableLife.Data.Services
 {
@@ -26,7 +28,13 @@ namespace SearchableLife.Data.Services
 
         public static IDocumentStore DocumentStore
         {
-            get { return _storage.Value; }
+            get
+            {
+                //initialize indexes
+                IndexCreation.CreateIndexes(typeof(All_Content).Assembly, _storage.Value);
+                IndexCreation.CreateIndexes(typeof(All_Taggable).Assembly, _storage.Value);
+                return _storage.Value;
+            }
         }
     }
 }

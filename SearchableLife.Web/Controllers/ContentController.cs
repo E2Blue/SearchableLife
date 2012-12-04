@@ -11,7 +11,7 @@ namespace SearchableLife.Web.Controllers
         //
         // GET: /Content/
 
-        public ActionResult Content(string id)
+        public ActionResult Content(string slug)
         {
             return View();
         }

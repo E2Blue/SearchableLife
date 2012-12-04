@@ -30,3 +30,15 @@ C:\projects\SearchableLife\SearchableLife.Web\bin\System.Web.WebPages.Razor.xml
 C:\projects\SearchableLife\SearchableLife.Web\obj\Debug\SearchableLife.Web.csprojResolveAssemblyReference.cache
 C:\projects\SearchableLife\SearchableLife.Web\obj\Debug\SearchableLife.Web.dll
 C:\projects\SearchableLife\SearchableLife.Web\obj\Debug\SearchableLife.Web.pdb
+C:\projects\SearchableLife\SearchableLife.Web\bin\SearchableLife.Data.dll
+C:\projects\SearchableLife\SearchableLife.Web\bin\SearchableLife.Domain.dll
+C:\projects\SearchableLife\SearchableLife.Web\bin\Raven.Client.Lightweight.dll
+C:\projects\SearchableLife\SearchableLife.Web\bin\Raven.Abstractions.dll
+C:\projects\SearchableLife\SearchableLife.Web\bin\NLog.dll
+C:\projects\SearchableLife\SearchableLife.Web\bin\SearchableLife.Data.pdb
+C:\projects\SearchableLife\SearchableLife.Web\bin\SearchableLife.Domain.pdb
+C:\projects\SearchableLife\SearchableLife.Web\bin\Raven.Client.Lightweight.pdb
+C:\projects\SearchableLife\SearchableLife.Web\bin\Raven.Abstractions.pdb
+C:\projects\SearchableLife\SearchableLife.Web\bin\NLog.xml
+C:\projects\SearchableLife\SearchableLife.Web\bin\Raven.Abstractions.xml
+C:\projects\SearchableLife\SearchableLife.Web\bin\Raven.Client.Lightweight.xml

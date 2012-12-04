@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using SearchableLife.Data.Indexes;
 using SearchableLife.Domain.Interface;
 using SearchableLife.Domain.Model;
 
@@ -34,10 +35,10 @@ namespace SearchableLife.Data.Services
         /// <returns></returns>
         public Content Get(string slug)
         {
+            slug = slug.ToLower();
             using (var session = DocumentStore.OpenSession())
             {
-                //FIXME: should use a slug index
-                return session.Query<Content>().First(e => e.Slug.ToLower() == slug.ToLower());
+                return session.Query<Content,All_Content>().FirstOrDefault(e => e.Slug == slug);
             }
         }
 
@@ -50,8 +51,7 @@ namespace SearchableLife.Data.Services
         {
             using (var session = DocumentStore.OpenSession())
             {
-                //FIXME:should use a taggable index
-                var result = session.Query<ITaggable>().Where(t => t.TagNames.Contains(tagName));
+                var result = session.Query<ITaggable,All_Taggable>().Where(t => t.TagNames.Any(tn => tn == tagName)).ToList();
                 return result;
             }
         }
@@ -63,7 +63,12 @@ namespace SearchableLife.Data.Services
         /// <param name="item">the item to create or update</param>
         public void Update(Content item)
         {
-            throw new NotImplementedException();
+            item.Slug = item.Slug.ToLower();
+            using (var session = DocumentStore.OpenSession())
+            {
+                session.Store(item, item.Slug);
+                session.SaveChanges();
+            }
         }
     }
 }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using SearchableLife.Domain.Model;
 
 namespace SearchableLife.Data.Services
 {
@@ -18,7 +19,12 @@ namespace SearchableLife.Data.Services
         /// <returns>Wether an item exists</returns>
         public bool Exists(string slug)
         {
-            throw new NotImplementedException();
+            slug = slug.ToLower();
+            //ugly implementation?
+            using (var session = DocumentStore.OpenSession())
+            {
+                return session.Query<Content>().Any(c => c.Slug == slug);
+            }
         }
     }
 }
