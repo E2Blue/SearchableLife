@@ -22,8 +22,6 @@ namespace SearchableLife.Web.Controllers
                 }
             }
             return View("ContentList", ContentService.Search(new Data.Queries.TaggableQuery { PageIndex = 0, PageSize = 10 }));
-
-
         }
     }
 }

@@ -7,7 +7,7 @@
 
 <h2>Entry</h2>
 
-@using (Html.BeginForm(ViewBag.Create == true ? "Update" : "Create", "Entry",FormMethod.Post))
+@using (Html.BeginForm(ViewBag.Update == true ? "Update" : "Create", "Entry",FormMethod.Post))
 {
 
     @Html.LabelFor(e => e.Title)

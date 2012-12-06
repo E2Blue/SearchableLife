@@ -1,0 +1,17 @@
+﻿@model SearchableLife.Domain.Collections.PagedList<SearchableLife.Domain.Model.Entry>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_adminlayout.cshtml";
+    ViewBag.SectionTitle = "Entries";
+}
+
+@foreach (SearchableLife.Domain.Model.Entry entry in Model)
+{
+    <h2>@Html.ActionLink(entry.Title, "update", new { id = entry.Slug })</h2>
+}
+
+@section right
+{
+    @Html.ActionLink("New entry","Create",null,new {@class = "tile add bg-purple"})
+}

@@ -39,16 +39,16 @@ namespace SearchableLife.Data.Services
         }
 
         /// <summary>
-        /// Retrieves a content item, either Tag, Entry or TagAggregator
+        /// Retrieves a content item, Entry or TagAggregator
         /// </summary>
         /// <param name="slug">The slug used to find the item</param>
         /// <returns></returns>
-        public IRoutable Get(string slug)
+        public Content Get(string slug)
         {
             slug = slug.ToLower();
             using (var session = DocumentStore.OpenSession())
             {
-                return session.Query<IRoutable, All_Content>().FirstOrDefault(e => e.Slug == slug);
+                return session.Query<Content, All_Content>().FirstOrDefault(e => e.Slug == slug);
             }
         }
 
@@ -67,8 +67,8 @@ namespace SearchableLife.Data.Services
                 {
                     result = (IRavenQueryable<Content>)result.Where(t => t.TagNames.Any(tn => tn == query.TagName));
                 }
-                result = (IRavenQueryable<Content>)result.Take(query.PageSize).Skip(query.PageSize * query.PageIndex);
-                
+                result = (IRavenQueryable<Content>)result.Skip(query.PageSize * query.PageIndex).Take(query.PageSize);
+
                 return new PagedList<Content>(result.ToList()) { PageIndex = query.PageIndex, PageSize = query.PageSize };
             }
         }
@@ -83,7 +83,12 @@ namespace SearchableLife.Data.Services
         {
             using (var session = DocumentStore.OpenSession())
             {
-                var result = session.Query<taggable>().Where(t => t.TagNames.Any(tn => tn == query.TagName)).Take(query.PageSize).Skip(query.PageSize * query.PageIndex);
+                var result = session.Query<taggable, All_Taggable>();
+                if (!string.IsNullOrEmpty(query.TagName))
+                {
+                    result = (IRavenQueryable<taggable>)result.Where(t => t.TagNames.Any(tn => tn == query.TagName));
+                }
+                result = (IRavenQueryable<taggable>)result.Skip(query.PageSize * query.PageIndex).Take(query.PageSize);
                 return new PagedList<taggable>(result.ToList()) { PageIndex = query.PageIndex, PageSize = query.PageSize };
             }
         }
@@ -98,10 +103,15 @@ namespace SearchableLife.Data.Services
             //make sure that slugs are always compared in lowercase
             item.Slug = item.Slug.ToLower();
 
+            //the date array should never be possible to overwrite from the ui.
+            var dbItem = Get(item.Slug);
+            item.Updated = dbItem.Updated;
+
             using (var session = DocumentStore.OpenSession())
             {
-                _tagService.CreateNonExisting(item.TagNames,session);
+                _tagService.CreateNonExisting(item.TagNames, session);
 
+                item.Updated.Add(DateTime.UtcNow);
                 session.Store(item, item.Slug);
                 session.SaveChanges();
             }

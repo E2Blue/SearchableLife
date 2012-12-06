@@ -20,7 +20,7 @@ namespace SearchableLife.Web.Areas.Admin.Controllers
 
             var result = ContentService.Search<Entry>(new TaggableQuery() {PageSize = 10, PageIndex = 0 });
 
-            return View();
+            return View(result);
         }
 
         public ActionResult Create()
@@ -31,7 +31,19 @@ namespace SearchableLife.Web.Areas.Admin.Controllers
 
         public ActionResult Update(string id)
         {
-            throw new NotImplementedException();
+            var entry = ContentService.Get(id);
+            if(entry != null)
+            {
+                ViewBag.Update = true;
+                return View(entry);
+            }
+            return RedirectToAction("Index");
+        }
+
+        [HttpPost]
+        public ActionResult Update(Entry entry, string csTags)
+        {
+            return Create(entry, csTags);
         }
 
         [HttpPost]
@@ -43,11 +55,11 @@ namespace SearchableLife.Web.Areas.Admin.Controllers
                 entry.TagNames = StringHelper.csStringTo(csTags);
             }
 
-            if (!string.IsNullOrEmpty(entry.Title) && !string.IsNullOrEmpty(entry.Slug) && !RouteService.Exists(entry.Slug))
+            if (!string.IsNullOrEmpty(entry.Title) && !string.IsNullOrEmpty(entry.Slug))
             {
                 ContentService.Update(entry);
             }
-            return View("Index");
+            return RedirectToAction("Index");
         }
 
     }

@@ -26,6 +26,9 @@ namespace SearchableLife.Domain.Model
         [AllowHtml()]
         public string HtmlContent { get; set; }
 
-        public DateTime Created { get; set; }
+        /// <summary>
+        /// Contains an entry for each time the content was updated
+        /// </summary>
+        public List<DateTime> Updated { get; set; }
     }
 }
