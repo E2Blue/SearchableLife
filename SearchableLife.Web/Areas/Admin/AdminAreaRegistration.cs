@@ -17,7 +17,7 @@ namespace SearchableLife.Web.Areas.Admin
             context.MapRoute(
                 "Admin_default",
                 "Admin/{controller}/{action}/{id}",
-                new {controller = "admin", action = "Index", id = UrlParameter.Optional }
+                new {controller = "site", action = "Index", id = UrlParameter.Optional }
             );
         }
     }

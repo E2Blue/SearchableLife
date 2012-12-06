@@ -4,9 +4,9 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using SearchableLife.Data.Queries;
-using SearchableLife.Domain.Helpers;
 using SearchableLife.Domain.Model;
 using SearchableLife.Web.Controllers;
+using SearchableLife.Web.Helpers;
 
 namespace SearchableLife.Web.Areas.Admin.Controllers
 {
@@ -19,6 +19,10 @@ namespace SearchableLife.Web.Areas.Admin.Controllers
         {
 
             var result = ContentService.Search<Entry>(new TaggableQuery() {PageSize = 10, PageIndex = 0 });
+            foreach (Entry entry in result)
+            {
+                entry.HtmlContent = entry.HtmlContent.StripHtml().Ellipsis(200);
+            }
 
             return View(result);
         }

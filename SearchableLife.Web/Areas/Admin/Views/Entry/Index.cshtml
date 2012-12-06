@@ -3,15 +3,25 @@
 @{
     ViewBag.Title = "Index";
     Layout = "~/Areas/Admin/Views/Shared/_adminlayout.cshtml";
-    ViewBag.SectionTitle = "Entries";
+    //ViewBag.SectionTitle = "Entries";
+    ViewBag.WrapClass = "wrap-admin entries";
 }
 
 @foreach (SearchableLife.Domain.Model.Entry entry in Model)
 {
-    <h2>@Html.ActionLink(entry.Title, "update", new { id = entry.Slug })</h2>
+    <div>
+        <h2>@Html.ActionLink(entry.Title, "update", new { id = entry.Slug })</h2>
+        @Html.Raw(entry.HtmlContent)
+    </div>
+}
+
+@section righthead
+{
+    <h1>Entries</h1>
+    <h2>Your life in entries</h2>
 }
 
 @section right
 {
-    @Html.ActionLink("New entry","Create",null,new {@class = "tile add bg-purple"})
+    @Html.ActionLink("New entry", "Create", null, new { @class = "tile add-entries bg-purple" })
 }

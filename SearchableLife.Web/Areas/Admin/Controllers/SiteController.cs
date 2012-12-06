@@ -6,7 +6,7 @@ using System.Web.Mvc;
 
 namespace SearchableLife.Web.Areas.Admin.Controllers
 {
-    public class AdminController : Controller
+    public class SiteController : Controller
     {
         //
         // GET: /Admin/Admin/

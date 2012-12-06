@@ -5,20 +5,23 @@
 <div class="clearfix">
     <div id="headleft" class="half">
         <div id="headactions">
-            @Html.ActionLink("Entries", "index", new { controller = "entry" }, new { @class = "bg-purple" })
+            @Html.ActionLink("Settings", "index", new { controller = "site" }, new { @class = "bg-red" })
+            @Html.ActionLink("Entries", "index", new { controller = "entry" }, new { @class = "bg-red" })
             @Html.ActionLink("Media", "index", new { controller = "media" }, new { @class = "bg-red" })
-            @Html.ActionLink("Tags", "index", new { controller = "tag" }, new { @class = "bg-green" })
+            @Html.ActionLink("Tags", "index", new { controller = "tag" }, new { @class = "bg-red" })
         </div>
     </div>
     <div id="headright" class="half bg-red">
-        @RenderSection("righthead",false)
+        <div id="headtitle">
+            @RenderSection("righthead", false)
+        </div>
     </div>
 </div>
 <div class="container">
     <div class="span18">
         @RenderBody()
-    </div>
+</div>
     <div class="span6">
-        @RenderSection("right",false)
-    </div>
+        @RenderSection("right", false)
+</div>
 </div>
