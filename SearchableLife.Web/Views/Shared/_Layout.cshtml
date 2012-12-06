@@ -5,10 +5,13 @@
     <meta name="viewport" content="width=device-width" />
     <title>@ViewBag.Title</title>
     @Styles.Render("~/Content/css")
-    @Scripts.Render("~/bundles/modernizr")
+    @Styles.Render("~/Content/metro-colors.css")
 </head>
 <body>
-    
+    <div id="header" class="container">
+        <h2 class="span24 blue">Sebastian Rosengren</h2>
+        <div class="span24"></div>
+    </div>
 
     @RenderBody()
 

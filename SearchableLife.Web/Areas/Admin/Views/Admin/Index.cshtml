@@ -1,0 +1,15 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_adminlayout.cshtml";
+}
+
+
+@section lefthead {
+    @Html.ActionLink("Entries", "index", "entry", new { @class = "bg-purple" })
+    @Html.ActionLink("Media", "index", "media", new { @class = "bg-red" })
+    @Html.ActionLink("Tags", "index", "tag", new { @class = "bg-green" })
+}
+
+@section righthead {
+    <h2>Index</h2>
+}

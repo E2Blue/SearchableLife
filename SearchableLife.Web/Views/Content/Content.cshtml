@@ -2,7 +2,21 @@
 
 @{
     ViewBag.Title = "Content";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    Layout = "~/Views/Shared/_rightsidebar.cshtml";
 }
 
-<h2>Content</h2>
+<h1>@Model.Title</h1>
+<div>
+    @Model.HtmlContent
+</div>
+
+@section right
+{
+    <h4>tags</h4>
+    @foreach (SearchableLife.Domain.Model.Tag tag in ViewBag.Tags)
+    {
+        <div class="tile">
+            <a href="@Url.Content("~/tag/" + tag.Slug)">@tag.Title</a>
+        </div>
+    }
+}

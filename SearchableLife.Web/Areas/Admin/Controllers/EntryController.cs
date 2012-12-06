@@ -15,14 +15,10 @@ namespace SearchableLife.Web.Areas.Admin.Controllers
         //
         // GET: /Admin/Entry/
 
-        public ActionResult Index(string id)
+        public ActionResult Index()
         {
-            if (string.IsNullOrEmpty(id))
-            {
-                return RedirectToAction("Index");
-            }
 
-            var result = ContentService.Search<Entry>(new TaggableQuery() { TagName = id, PageSize = 10, PageIndex = 0 });
+            var result = ContentService.Search<Entry>(new TaggableQuery() {PageSize = 10, PageIndex = 0 });
 
             return View();
         }

@@ -14,9 +14,10 @@ namespace SearchableLife.Web
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
             routes.MapRoute(
-                "admin",
-                "admin/{action}/{slug}",
-                new { controller = "Admin", action = "Index", slug = UrlParameter.Optional }
+                "tag",
+                "tag/{slug}",
+                new { controller = "tag", action = "tag", slug = UrlParameter.Optional },
+                new string[]{"SearchableLife.Web.Controllers"}
                 );
 
             routes.MapRoute(

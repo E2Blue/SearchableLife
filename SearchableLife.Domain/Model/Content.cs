@@ -8,7 +8,7 @@ using System.Web.Mvc;
 
 namespace SearchableLife.Domain.Model
 {
-    public abstract class Content : IRoutable, ITaggable
+    public class Content : IRoutable, ITaggable
     {
         #region IRoutable
         public string Title { get; set; }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web;
 using Raven.Client;
 using Raven.Client.Linq;
 using SearchableLife.Data.Queries;
@@ -39,14 +40,33 @@ namespace SearchableLife.Data.Services
             }
         }
 
+        public Tag GetBySlug(string slug)
+        {
+            slug = slug.ToLower();
+            using (var session = DocumentStore.OpenSession())
+            {
+                return session.Query<Tag>().FirstOrDefault(t => t.Slug == slug);
+            }
+        }
+
         /// <summary>
         /// Returns a set of tags
         /// </summary>
         /// <param name="tagNames">The tagnames to search by</param>
         /// <returns>Found tags</returns>
-        public IEnumerable<Tag> Get(IEnumerable<string> tagNames)
+        public IEnumerable<Tag> Get(List<string> tagNames)
         {
-            throw new NotImplementedException();
+            using (var session = DocumentStore.OpenSession())
+            {
+                //BLOG: about tags OR mixing
+                //var v = "{(Title:tag1) AND (Title:tag2) AND (Title:\"tag 3\") AND (Title:tag\-4) AND (Title:tag\+5)}";
+                for(int i = 0;i < tagNames.Count();i++)
+                {
+                    tagNames[i] = string.Format("(Title:\"{0}\")",tagNames[i]);
+                }
+                var result = session.Advanced.LuceneQuery<Tag>().Where(string.Join(" OR ",tagNames));
+                return result;
+            }
         }
 
         /// <summary>
@@ -70,7 +90,7 @@ namespace SearchableLife.Data.Services
             {
                 if (!tags.Any(t => t.Title == tagName))
                 {
-                    session.Store(new Tag { Title = tagName });
+                    session.Store(new Tag { Title = tagName, Slug = HttpUtility.UrlEncode(tagName.Replace(' ','-')) });
                 }
             }
         }

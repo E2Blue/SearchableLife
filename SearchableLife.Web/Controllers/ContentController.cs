@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using SearchableLife.Domain.Interface;
 
 namespace SearchableLife.Web.Controllers
 {
@@ -10,12 +11,19 @@ namespace SearchableLife.Web.Controllers
     {
         public ActionResult Content(string slug)
         {
-            if (string.IsNullOrEmpty(slug))
+            if (!string.IsNullOrEmpty(slug))
             {
-                return View("ContentList",ContentService.Search(new Data.Queries.TaggableQuery{PageIndex = 0,PageSize = 10}));
-            }
+                var content = ContentService.Get(slug);
 
-            return View();
+                if (content != null)
+                {
+                    ViewBag.Tags = TagService.Get(((ITaggable)content).TagNames);
+                    return View(content);
+                }
+            }
+            return View("ContentList", ContentService.Search(new Data.Queries.TaggableQuery { PageIndex = 0, PageSize = 10 }));
+
+
         }
     }
 }

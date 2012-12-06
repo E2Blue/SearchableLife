@@ -1,0 +1,13 @@
+﻿@{
+    Layout = Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container clearfix">
+    <div class="span18">
+        @RenderBody()
+    </div>
+    <div class="span6">
+        @RenderSection("right", false)
+    </div>
+    <div class="span24"></div>
+</div>
