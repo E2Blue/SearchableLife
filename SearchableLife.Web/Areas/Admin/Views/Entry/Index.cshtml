@@ -11,7 +11,7 @@
 {
     <div>
         <h2>@Html.ActionLink(entry.Title, "update", new { id = entry.Slug })</h2>
-        @Html.Raw(entry.HtmlContent)
+        @entry.HtmlContent
     </div>
 }
 

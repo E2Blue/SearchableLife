@@ -17,6 +17,8 @@ namespace SearchableLife.Domain.Model
         public string MenuTitle { get; set; }
 
         public string MenuDescription { get; set; }
+
+        public string MenuImageUrl { get; set; }
         #endregion
 
         public List<Tag> AggragatedTags { get; set; }

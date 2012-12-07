@@ -11,5 +11,7 @@ namespace SearchableLife.Domain.Interface
         string MenuTitle { get; set; }
 
         string MenuDescription { get; set; }
+
+        string MenuImageUrl { get; set; }
     }
 }

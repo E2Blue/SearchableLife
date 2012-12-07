@@ -2,11 +2,24 @@
 
 @{
     ViewBag.Title = "ContentList";
-    Layout = "~/Views/Shared/_page.cshtml";
+    Layout = "~/Views/Shared/_rightsidebar.cshtml";
 }
 
 <h2>ContentList</h2>
 @foreach (var content in Model)
 {
-    <h2>@content.Title</h2>
+    <div>
+        <h2>@Html.ActionLink(content.Title, "index", "content", new { slug = content.Slug }, null)</h2>
+        @content.HtmlContent
+    </div>
+}
+
+@section right {
+    @foreach (SearchableLife.Domain.Model.Tag tag in ((IEnumerable<SearchableLife.Domain.Model.Tag>)ViewBag.Tags).Where(t => !string.IsNullOrEmpty(t.MenuDescription)))
+    {
+        <div class="tile" style="background-image:url('@Url.Content("~/"+tag.MenuImageUrl)')">
+            @Html.ActionLink(tag.MenuTitle ?? tag.Title, "tag", new { controller = "tag", slug = tag.Slug }, null)
+            <p>@tag.MenuDescription</p>
+        </div>
+    }
 }
