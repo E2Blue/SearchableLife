@@ -148,6 +148,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\HtmlHelper.cs" />
     <Compile Include="Helpers\StringHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -264,6 +265,7 @@
     <Content Include="Views\Tag\Tag.cshtml" />
     <Content Include="Views\Shared\_rightsidebar.cshtml" />
     <Content Include="Views\Shared\_page.cshtml" />
+    <Content Include="Views\Shared\_admin.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

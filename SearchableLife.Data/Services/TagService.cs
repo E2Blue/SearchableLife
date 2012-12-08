@@ -50,26 +50,6 @@ namespace SearchableLife.Data.Services
         }
 
         /// <summary>
-        /// Returns a set of tags
-        /// </summary>
-        /// <param name="tagNames">The tagnames to search by</param>
-        /// <returns>Found tags</returns>
-        public IEnumerable<Tag> Get(List<string> tagNames)
-        {
-            using (var session = DocumentStore.OpenSession())
-            {
-                //BLOG: about tags OR mixing
-                //var v = "{(Title:tag1) AND (Title:tag2) AND (Title:\"tag 3\") AND (Title:tag\-4) AND (Title:tag\+5)}";
-                for(int i = 0;i < tagNames.Count();i++)
-                {
-                    tagNames[i] = string.Format("(Title:\"{0}\")",tagNames[i]);
-                }
-                var result = session.Advanced.LuceneQuery<Tag>().Where(string.Join(" OR ",tagNames));
-                return result;
-            }
-        }
-
-        /// <summary>
         /// Updates a tag, creates one if no one with the name exists, name is not updateable
         /// </summary>
         /// <param name="tag"></param>
@@ -86,11 +66,11 @@ namespace SearchableLife.Data.Services
         {
             var tags = session.Query<Tag>();
 
-            foreach(string tagName in tagNames)
+            foreach (string tagName in tagNames)
             {
                 if (!tags.Any(t => t.Title == tagName))
                 {
-                    session.Store(new Tag { Title = tagName, Slug = HttpUtility.UrlEncode(tagName.Replace(' ','-')) });
+                    session.Store(new Tag { Title = tagName, Slug = HttpUtility.UrlEncode(tagName.Replace(' ', '-')) });
                 }
             }
         }
@@ -100,11 +80,24 @@ namespace SearchableLife.Data.Services
         /// </summary>
         /// <param name="query">The query object used for getting tags</param>
         /// <returns></returns>
-        public PagedList<Tag> Search(GenericQuery query)
+        public PagedList<Tag> Search(TagQuery query)
         {
             using (var session = DocumentStore.OpenSession())
             {
-                var result = session.Query<Tag>().Skip(query.PageSize * query.PageIndex).Take(query.PageSize);
+                var result = session.Advanced.LuceneQuery<Tag>();
+                if (query.TagNames != null && query.TagNames.Count > 0)
+                {
+                    for (int i = 0; i < query.TagNames.Count(); i++)
+                    {
+                        query.TagNames[i] = string.Format("(Title:\"{0}\")", query.TagNames[i]);
+                    }
+                    result = result.Where(string.Join(" OR ", query.TagNames));
+                }
+                if (query.PageSize > 0)
+                {
+                    result = result.Skip(query.PageSize * query.PageIndex).Take(query.PageSize);
+                }
+
                 return new PagedList<Tag>(result.ToList()) { PageIndex = query.PageIndex, PageSize = query.PageSize };
             }
         }

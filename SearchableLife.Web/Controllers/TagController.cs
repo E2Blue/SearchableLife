@@ -19,7 +19,7 @@ namespace SearchableLife.Web.Controllers
                     return View(tag);
                 }
             }
-            return View("index", TagService.Search(new Data.Queries.GenericQuery { PageIndex = 0, PageSize = 10 }));
+            return View("index", TagService.Search(new Data.Queries.TagQuery { PageIndex = 0, PageSize = 10 }));
         }
 
     }

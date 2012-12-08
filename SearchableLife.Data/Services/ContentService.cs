@@ -57,15 +57,16 @@ namespace SearchableLife.Data.Services
         /// </summary>
         /// <param name="tagName">The tag to search for</param>
         /// <returns></returns>
-        public PagedList<Content> Search(TaggableQuery query)
+        public PagedList<Content> Search(TagQuery query)
         {
             using (var session = DocumentStore.OpenSession())
             {
                 var result = session.Query<Content, All_Taggable>();
                 //filter on tag if a tag query is specified
-                if (!string.IsNullOrEmpty(query.TagName))
+                if (query.TagNames != null && query.TagNames.Count > 0)
                 {
-                    result = (IRavenQueryable<Content>)result.Where(t => t.TagNames.Any(tn => tn == query.TagName));
+                    //FIXME: Currently only filters on the first provided tag name
+                    result = (IRavenQueryable<Content>)result.Where(t => t.TagNames.Any(tn => tn == query.TagNames[0]));
                 }
                 result = (IRavenQueryable<Content>)result.Skip(query.PageSize * query.PageIndex).Take(query.PageSize);
 
@@ -79,14 +80,15 @@ namespace SearchableLife.Data.Services
         /// <typeparam name="taggable">Media or entry</typeparam>
         /// <param name="query"></param>
         /// <returns></returns>
-        public PagedList<taggable> Search<taggable>(TaggableQuery query) where taggable : ITaggable
+        public PagedList<taggable> Search<taggable>(TagQuery query) where taggable : ITaggable
         {
             using (var session = DocumentStore.OpenSession())
             {
                 var result = session.Query<taggable, All_Taggable>();
-                if (!string.IsNullOrEmpty(query.TagName))
+                if (query.TagNames != null && query.TagNames.Count > 0)
                 {
-                    result = (IRavenQueryable<taggable>)result.Where(t => t.TagNames.Any(tn => tn == query.TagName));
+                    //FIXME: Currently only filters on the first provided tag name
+                    result = (IRavenQueryable<taggable>)result.Where(t => t.TagNames.Any(tn => tn == query.TagNames[0]));
                 }
                 result = (IRavenQueryable<taggable>)result.Skip(query.PageSize * query.PageIndex).Take(query.PageSize);
                 return new PagedList<taggable>(result.ToList()) { PageIndex = query.PageIndex, PageSize = query.PageSize };

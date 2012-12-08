@@ -6,11 +6,8 @@ using System.Threading.Tasks;
 
 namespace SearchableLife.Data.Queries
 {
-    public class TaggableQuery : GenericQuery
+    public class TagQuery : GenericQuery
     {
-        /// <summary>
-        /// Currently only supports searching by a single tag
-        /// </summary>
-        public String TagName { get; set; }
+        public List<String> TagNames { get; set; }
     }
 }

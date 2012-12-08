@@ -10,16 +10,29 @@
 {
     <div>
         <h2>@Html.ActionLink(content.Title, "index", "content", new { slug = content.Slug }, null)</h2>
-        @content.HtmlContent
+        <div>
+            <div>
+                @content.Updated[0]
+            </div>
+            @foreach (string tagName in content.TagNames)
+            {
+                var tag = ((IEnumerable<SearchableLife.Domain.Model.Tag>)ViewBag.Tags).FirstOrDefault(t => t.Title == tagName);
+                if (tag != null)
+                {
+                @Html.ActionLink(tagName, "tag", new { controller = "tag", slug = tag.Slug })
+                }
+            }
+            <p>@content.HtmlContent</p>
+        </div>
     </div>
 }
 
 @section right {
     @foreach (SearchableLife.Domain.Model.Tag tag in ((IEnumerable<SearchableLife.Domain.Model.Tag>)ViewBag.Tags).Where(t => !string.IsNullOrEmpty(t.MenuDescription)))
     {
-        <div class="tile" style="background-image:url('@Url.Content("~/"+tag.MenuImageUrl)')">
-            @Html.ActionLink(tag.MenuTitle ?? tag.Title, "tag", new { controller = "tag", slug = tag.Slug }, null)
+        <a href="@Url.Content("~")tag/@tag.Slug" class="tile bg-@Html.ColorFromLetter(tag.MenuDescription)" style="background-image:url('@Url.Content("~/")@(tag.MenuImageUrl ?? "content/images/tileicons/Tag-transparent.png")')">
+            <h4>@tag.Title</h4>
             <p>@tag.MenuDescription</p>
-        </div>
+        </a>
     }
 }

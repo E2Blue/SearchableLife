@@ -16,7 +16,7 @@ namespace SearchableLife.Web.Areas.Admin.Controllers
 
         public ActionResult Index()
         {
-            var result = TagService.Search(new GenericQuery() { PageIndex = 0, PageSize = 10 });
+            var result = TagService.Search(new TagQuery() { PageIndex = 0, PageSize = 10 });
             return View();
         }
 

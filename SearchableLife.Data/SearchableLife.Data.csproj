@@ -54,7 +54,7 @@
     <Compile Include="Indexes\All_Taggable.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Queries\TaggableQuery.cs" />
-    <Compile Include="Queries\GenericBase.cs" />
+    <Compile Include="Queries\GenericQuery.cs.cs" />
     <Compile Include="Services\ContentService.cs" />
     <Compile Include="Services\MediaService.cs" />
     <Compile Include="Services\RouteService.cs" />

@@ -18,7 +18,7 @@ namespace SearchableLife.Web.Areas.Admin.Controllers
         public ActionResult Index()
         {
 
-            var result = ContentService.Search<Entry>(new TaggableQuery() {PageSize = 10, PageIndex = 0 });
+            var result = ContentService.Search<Entry>(new TagQuery() {PageSize = 10, PageIndex = 0 });
             foreach (Entry entry in result)
             {
                 entry.HtmlContent = entry.HtmlContent.StripHtml().Ellipsis(200);
