@@ -141,6 +141,7 @@
     <Compile Include="Areas\Admin\Controllers\EntryController.cs" />
     <Compile Include="Areas\Admin\Controllers\MediaController.cs" />
     <Compile Include="Areas\Admin\Controllers\TagController.cs" />
+    <Compile Include="Areas\Admin\ViewModels\EntryVM.cs" />
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\ContentController.cs" />
     <Compile Include="Controllers\TagController.cs" />

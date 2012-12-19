@@ -4,7 +4,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using SearchableLife.Domain.Interface;
-using System.Web.Mvc;
 
 namespace SearchableLife.Domain.Model
 {
@@ -23,7 +22,6 @@ namespace SearchableLife.Domain.Model
         /// <summary>
         /// The Html content of the item
         /// </summary>
-        [AllowHtml()]
         public string HtmlContent { get; set; }
 
         /// <summary>

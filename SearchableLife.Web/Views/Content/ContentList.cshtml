@@ -9,7 +9,7 @@
 @foreach (var content in Model)
 {
     <div>
-        <h2>@Html.ActionLink(content.Title, "index", "content", new { slug = content.Slug }, null)</h2>
+        <h2>@Html.ActionLink(content.Title, "content", "content", new { slug = content.Slug }, null)</h2>
         <div>
             <div>
                 @content.Updated[0]

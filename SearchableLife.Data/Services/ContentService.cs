@@ -102,12 +102,20 @@ namespace SearchableLife.Data.Services
         /// <param name="item">the item to create or update</param>
         public void Update(Content item)
         {
+            //It should not be possible to save the item with an integer slug
+            int parseableSlug;
+            if (int.TryParse(item.Slug, out parseableSlug))
+                return;
+
             //make sure that slugs are always compared in lowercase
             item.Slug = item.Slug.ToLower();
 
             //the date array should never be possible to overwrite from the ui.
             var dbItem = Get(item.Slug);
-            item.Updated = dbItem.Updated;
+            if (dbItem != null)
+            {
+                item.Updated = dbItem.Updated;
+            }
 
             using (var session = DocumentStore.OpenSession())
             {

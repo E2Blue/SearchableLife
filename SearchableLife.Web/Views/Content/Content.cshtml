@@ -7,7 +7,7 @@
 
 <h1>@Model.Title</h1>
 <div>
-    @Model.HtmlContent
+   @Html.Raw(@Model.HtmlContent)
 </div>
 
 @section right
